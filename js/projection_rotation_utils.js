@@ -55,8 +55,8 @@ function rotation_matrix(a, b, c) {
     b = b*Math.PI/180
     c = c*Math.PI/180
     var matRx = [   [          1,            0, 0],
-                    [   0, Math.cos(b), -Math.sin(b)],
-                    [   0, Math.sin(b), Math.cos(b)] ]
+                    [   0, Math.cos(a), -Math.sin(a)],
+                    [   0, Math.sin(a), Math.cos(a)] ]
     
     var matRy = [   [Math.cos(b),   0, Math.sin(b)],
                     [          0,            1, 0],
@@ -69,4 +69,9 @@ function rotation_matrix(a, b, c) {
     var matR = matrix_multp(matRx, matRy);
     var matR = matrix_multp(matR, matRz);
     return matR;
+}
+
+function rotate_vec(a,b,c,vector) {
+    Rot = rotation_matrix(a,b,c)
+    return matrix_multp(Rot,vector)
 }

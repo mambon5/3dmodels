@@ -5,10 +5,17 @@
 <h1>Models 3D</h1>
 <h2>Figures dibuixades amb js</h2>
 
-<canvas id="myCanvas"></canvas>
+<div>
+    <p>rotation x <input type="number" id="angle_x" name="angle_x" value="0" onclick="main()">
+    rotation y <input type="number" id="angle_y" name="angle_y" value="0" onclick="main()">
+    rotation z <input type="number" id="angle_z" name="angle_z" value="0" onclick="main()">
+    </p>
+    <button onclick="main()">rota</button>
+    </div>
+
+<canvas id="myCanvas" width="800" height="800"></canvas>
 
 <link rel="stylesheet" href="css/3dstyle.css">
-
 
 <script src="js/3dcalc_utils.js"></script>
 <script src="js/projection_rotation_utils.js"></script>
