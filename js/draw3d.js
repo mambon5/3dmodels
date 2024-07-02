@@ -2,6 +2,9 @@ const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 ctx.scale(1, -1)
 ctx.translate(0,-canvas.height/2)
+ctx.lineWidth = 2;
+canvas_zoom = 4
+
 function main() {    
     // resizeCanvas();
     // dibuixaFigures(); 
@@ -21,11 +24,11 @@ function main() {
 
 
 function dibu_poliedre(punts) {// dibuixem en 2d un poliedre (només usem les 2 primeres coords)
-    ctx.moveTo(punts[0][0], punts[0][1]);
+    ctx.moveTo(punts[0][0]*canvas_zoom, punts[0][1]*canvas_zoom);
     for(let i=1; i< punts.length; i++) {        
-        ctx.lineTo(punts[i][0], punts[i][1]);
+        ctx.lineTo(punts[i][0]*canvas_zoom, punts[i][1]*canvas_zoom);
     }
-    ctx.lineTo(punts[0][0], punts[0][1]);
+    ctx.lineTo(punts[0][0]*canvas_zoom, punts[0][1]*canvas_zoom);
 }
 
 
@@ -60,6 +63,7 @@ function dibuix_rectangle(rectangle, a,b,c) {
         // pillant una cara
         var proj = rectangle[j]
         for(var i=0; i< rectangle[j].length; i++) {
+            // pillant cada vector de la cara
             proj[i] = rotate_vec(a,b,c,rectangle[j][i])
         }
         // dbuixant la cara rotada
@@ -71,15 +75,29 @@ function dibuixa(a,b,c) {
     x =50; y =50; z = 10 // punt inicial en 3D
     //a,b,c angles de rotació
 
-    rectanble1 = rectangle3d(x,y,z,ample,alt,profund);
-    rectanble2 = rectangle3d(x+200,y,z,ample*2,20,20);
+    rect1 = rectangle3d(x,y,z,4,4,50);
+    rect2 = rectangle3d(x+40,y,z,4,4,50);
+    rect3 = rectangle3d(x+40+40,y,z,4,4,50);
+    rect4 = rectangle3d(x+40+40+40,y,z,4,4,50);
     
+    
+    rect5 = rectangle3d(x,y,z+50,124,4,4);
+    rect6 = rectangle3d(x,y+20,z+50,124,4,4);
+
+    rect7 = rectangle3d(x,y,z+50,4,20,4);
+    rect8 = rectangle3d(x+40,y,z+50,4,20,4);
+    rect9 = rectangle3d(x,y,z,4,20,4);
+    rect10 = rectangle3d(x+40,y,z,4,20,4);
+    rect11 = rotate_rectangle_from_point(rect10,3,0,0,[x+40,y,z])
+    
+    var model3d = [rect1, rect2, rect3, rect4,rect5,rect6,rect7,rect8,rect9,rect10,rect11]
     // start a new path
     ctx.beginPath();
 
-   
-    dibuix_rectangle(rectanble1,a,b,c)
-    dibuix_rectangle(rectanble2,a,b,c)
+    for(var i=0;i<model3d.length;i++) {
+        dibuix_rectangle(model3d[i],a,b,c)
+    }
+    
 
     
     

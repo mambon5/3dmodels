@@ -75,3 +75,27 @@ function rotate_vec(a,b,c,vector) {
     Rot = rotation_matrix(a,b,c)
     return matrix_multp(Rot,vector)
 }
+
+function rotate_vec_from_point(a,b,c,vector, point) {
+    Rot = rotation_matrix(a,b,c)
+    let vec = vector_sum(vector, vec_per_escalar(point,-1))
+    vec = matrix_multp(Rot,vec)
+    vec = vector_sum(vec, point)
+    return vec
+}
+
+function rotate_rectangle_from_point(rectangle, a,b,c, point) {
+    let rect = rectangle;
+    // rotant rectangle
+    for(let j=0;j<rectangle.length;j++) {
+       // pillant una cara
+       var cara = rectangle[j]
+       for(var i=0; i< rectangle[j].length; i++) {
+           // pillant cada vector de la cara
+           cara[i] = rotate_vec_from_point(a,b,c,rectangle[j][i], point)
+       }
+       // guardant la cara rotada
+       rect[j] = cara
+   }
+   return rect;
+}

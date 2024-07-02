@@ -167,6 +167,11 @@ function matrix_multp(mat1, mat2) {
         resMat.push(vector);
         
     }
+    if(resMat[0].length == 1) {
+        // means we have a column vector which we need to be a row vector as it is the normal vector form
+        resMat = column_to_vector(resMat)
+    }
+
     return resMat;
 }
 
