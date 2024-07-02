@@ -1,16 +1,20 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
-
+ctx.scale(1, -1)
+ctx.translate(0,-canvas.height/2)
 function main() {    
     // resizeCanvas();
     // dibuixaFigures(); 
+    
+     
+
     var a = document.getElementById("angle_x").value
     var b = document.getElementById("angle_y").value
     var c = document.getElementById("angle_z").value
     a = parseInt(a)
     b = parseInt(b)
     c = parseInt(c)
-    ctx.clearRect(0,0,800,800)
+    ctx.clearRect(0,-400,800, 1200)
     dibuixa(a,b,c);
           
 }
@@ -64,7 +68,7 @@ function dibuix_rectangle(rectangle, a,b,c) {
 }
 
 function dibuixa(a,b,c) {
-    x = 200; y =200; z = 10 // punt inicial en 3D
+    x =50; y =50; z = 10 // punt inicial en 3D
     //a,b,c angles de rotació
 
     rectanble1 = rectangle3d(x,y,z,ample,alt,profund);
@@ -84,6 +88,7 @@ function dibuixa(a,b,c) {
     
     // Draw the Path
     ctx.stroke();
+    
 
 }
 
