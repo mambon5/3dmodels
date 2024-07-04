@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body onmousedown="pillaPos(event)" onmousemove="actualitzaPos(event)" onmouseup="lliberaPos()">
 <title>models 3d</title>
 <h1>Models 3D</h1>
 <h2>Figures dibuixades amb js</h2>
@@ -9,6 +9,7 @@
     <p>rotation x <input type="number" id="angle_x" name="angle_x" value="0" onclick="main()">
     rotation y <input type="number" id="angle_y" name="angle_y" value="0" onclick="main()">
     rotation z <input type="number" id="angle_z" name="angle_z" value="0" onclick="main()">
+    zoom <input type="number" id="user_zoom" name="user_zoom" value="1" onclick="main()">
     </p>
     <button onclick="main()">rota</button>
     </div>
@@ -17,6 +18,7 @@
 
 <link rel="stylesheet" href="css/3dstyle.css">
 
+<script src="js/mouseEvents.js"></script>
 <script src="js/3dcalc_utils.js"></script>
 <script src="js/projection_rotation_utils.js"></script>
 <script src="js/matrix_ops.js"></script>

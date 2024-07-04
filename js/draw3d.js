@@ -1,9 +1,10 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 ctx.scale(1, -1)
-ctx.translate(0,-canvas.height/2)
+ctx.translate(canvas.width/2,-canvas.height/2)
 ctx.lineWidth = 2;
-canvas_zoom = 4
+canvas_zoom = 3
+userZoom = 1
 
 function main() {    
     // resizeCanvas();
@@ -14,21 +15,33 @@ function main() {
     var a = document.getElementById("angle_x").value
     var b = document.getElementById("angle_y").value
     var c = document.getElementById("angle_z").value
+    userZoom = document.getElementById("user_zoom").value
     a = parseInt(a)
     b = parseInt(b)
     c = parseInt(c)
-    ctx.clearRect(0,-400,800, 1200)
+    userZoom = parseInt(userZoom)
+    // controlant que l'usuari no es flipi amb el zoom
+    if(userZoom<1) {
+        userZoom = 1
+        document.getElementById("user_zoom").value = 1
+    }
+    if(userZoom>10) {
+        userZoom = 10
+        document.getElementById("user_zoom").value = 10
+    }
+
+    ctx.clearRect(-400,-400,1200, 1200)
     dibuixa(a,b,c);
           
 }
 
 
 function dibu_poliedre(punts) {// dibuixem en 2d un poliedre (només usem les 2 primeres coords)
-    ctx.moveTo(punts[0][0]*canvas_zoom, punts[0][1]*canvas_zoom);
+    ctx.moveTo(punts[0][0]*canvas_zoom*userZoom, punts[0][1]*canvas_zoom*userZoom);
     for(let i=1; i< punts.length; i++) {        
-        ctx.lineTo(punts[i][0]*canvas_zoom, punts[i][1]*canvas_zoom);
+        ctx.lineTo(punts[i][0]*canvas_zoom*userZoom, punts[i][1]*canvas_zoom*userZoom);
     }
-    ctx.lineTo(punts[0][0]*canvas_zoom, punts[0][1]*canvas_zoom);
+    ctx.lineTo(punts[0][0]*canvas_zoom*userZoom, punts[0][1]*canvas_zoom*userZoom);
 }
 
 
@@ -71,10 +84,8 @@ function dibuix_rectangle(rectangle, a,b,c) {
     }
 }
 
-function dibuixa(a,b,c) {
-    x =50; y =50; z = 10 // punt inicial en 3D
-    //a,b,c angles de rotació
-
+function model_viscaSofa(x,y,z) {
+    // x, y, z, ample, alt, profund
     rect1 = rectangle3d(x,y,z,4,4,50);
     rect2 = rectangle3d(x+40,y,z,4,4,50);
     rect3 = rectangle3d(x+40+40,y,z,4,4,50);
@@ -88,9 +99,17 @@ function dibuixa(a,b,c) {
     rect8 = rectangle3d(x+40,y,z+50,4,20,4);
     rect9 = rectangle3d(x,y,z,4,20,4);
     rect10 = rectangle3d(x+40,y,z,4,20,4);
-    rect11 = rotate_rectangle_from_point(rect10,3,0,0,[x+40,y,z])
+    rect11 = rotate_rectangle_from_point(rect10,0,0,0,[x+40,y,z])
     
     var model3d = [rect1, rect2, rect3, rect4,rect5,rect6,rect7,rect8,rect9,rect10,rect11]
+    return model3d
+}
+
+function dibuixa(a,b,c) {
+    x =-50; y =20; z = 0 // punt inicial en 3D
+    //a,b,c angles de rotació
+
+    model3d = model_viscaSofa(x, y, z)  
     // start a new path
     ctx.beginPath();
 
