@@ -12,13 +12,13 @@ function main() {
     
      
 
-    var a = document.getElementById("angle_x").value
-    var b = document.getElementById("angle_y").value
-    var c = document.getElementById("angle_z").value
+    var alpha = document.getElementById("angle_x").value
+    var beta = document.getElementById("angle_y").value
+    var gamma = document.getElementById("angle_z").value
     userZoom = document.getElementById("user_zoom").value
-    a = parseInt(a)
-    b = parseInt(b)
-    c = parseInt(c)
+    alpha = parseInt(alpha)
+    beta = parseInt(beta)
+    gamma = parseInt(gamma)
     userZoom = parseInt(userZoom)
     // controlant que l'usuari no es flipi amb el zoom
     if(userZoom<1) {
@@ -31,7 +31,7 @@ function main() {
     }
 
     ctx.clearRect(-400,-400,1200, 1200)
-    dibuixa(a,b,c);
+    dibuixa(alpha,beta,gamma);
           
 }
 
@@ -51,7 +51,7 @@ ample = 100;
 alt = 100;
 profund = 100;
 
-function rectangle3d(x,y,z,ample,alt,profund) {
+function rectangle3d(x,y,z,ample,alt,profund,color="black") {
     // construint les 6 cares del cub en 3d
     var cara1 = [[x,y,z], [x+ample, y, z], [x+ample, y+alt, z], [x, y+alt, z]]
     var cara2 = [[x,y,z+profund], [x+ample, y, z+profund], [x+ample, y+alt, z+profund], 
@@ -67,51 +67,84 @@ function rectangle3d(x,y,z,ample,alt,profund) {
     poliedre = [cara1, cara2, cara3, cara4, cara5, cara6]
     
     
-    return poliedre
+    return [poliedre, color]
 }
 
 function dibuix_rectangle(rectangle, a,b,c) {
+    let poliedre = rectangle[0]
+    // preparant el camí
+    ctx.beginPath();
      // rotant rectangle
-     for(let j=0;j<rectangle.length;j++) {
+     for(let j=0;j<poliedre.length;j++) {
         // pillant una cara
-        var proj = rectangle[j]
-        for(var i=0; i< rectangle[j].length; i++) {
+        var proj = poliedre[j]
+        for(var i=0; i< poliedre[j].length; i++) {
             // pillant cada vector de la cara
-            proj[i] = rotate_vec(a,b,c,rectangle[j][i])
+            proj[i] = rotate_vec(a,b,c,poliedre[j][i])
         }
         // dbuixant la cara rotada
         dibu_poliedre(proj)
+        ctx.strokeStyle = rectangle[1];
+    
+        // Draw the Path
+        ctx.stroke();
+        
     }
 }
 
 function model_viscaSofa(x,y,z) {
     // x, y, z, ample, alt, profund
+    //travesanys profund terra    
     rect1 = rectangle3d(x,y,z,4,4,50);
-    rect2 = rectangle3d(x+40,y,z,4,4,50);
-    rect3 = rectangle3d(x+40+40,y,z,4,4,50);
-    rect4 = rectangle3d(x+40+40+40,y,z,4,4,50);
+    rect2 = rectangle3d(x+50,y,z,4,4,50);
+    rect3 = rectangle3d(x+50+50,y,z,4,4,50);
+    rect4 = rectangle3d(x+50+50+50,y,z,4,4,50);
+    rect4_2 = rectangle3d(x+200,y,z,4,4,50);
     
-    
-    rect5 = rectangle3d(x,y,z+50,124,4,4);
-    rect6 = rectangle3d(x,y+20,z+50,124,4,4);
+    //travesanys llargs 
+    // rect5 = rectangle3d(x,y,z+50,124,4,4);
+    rect6 = rectangle3d(x,y+20,z+50,205,4,4);
 
+    // pal amun petit frontal
     rect7 = rectangle3d(x,y,z+50,4,20,4);
-    rect8 = rectangle3d(x+40,y,z+50,4,20,4);
-    rect9 = rectangle3d(x,y,z,4,20,4);
-    rect10 = rectangle3d(x+40,y,z,4,20,4);
-    rect11 = rotate_rectangle_from_point(rect10,0,0,0,[x+40,y,z])
+    rect8 = rectangle3d(x+50,y,z+50,4,20,4);
+    rect8v1 = rectangle3d(x+100,y,z+50,4,20,4);
+    rect8v2 = rectangle3d(x+150,y,z+50,4,20,4);
+    rect8v3 = rectangle3d(x+200,y,z+50,4,20,4);
+
+    // pal amunt llarg darrere
+    rectAll1 = rectangle3d(x,y,z-4,4,90,4);
+    rectAll2 = rectangle3d(x+50,y,z-4,4,90,4, "red");
+    rectAll3 = rectangle3d(x+100,y,z-4,4,90,4);
+    rectAll4 = rectangle3d(x+150,y,z-4,4,90,4);
+    rectAll5 = rectangle3d(x+200,y,z-4,4,90,4);
     
-    var model3d = [rect1, rect2, rect3, rect4,rect5,rect6,rect7,rect8,rect9,rect10,rect11]
+    
+    // pals inclinats llargs respaldo
+    //respado vs asiento debe manteren 110-120 grados de inclinacion, means 60 wrt vertical
+    let rectIll1 = [rotate_rectangle_from_point(
+        rectangle3d(x+0,y,z-4+15, 4, 90, 4)[0], -10,0,0,[x+0,y,z-4+10])]
+    let rectIll2 = [rotate_rectangle_from_point(
+        rectangle3d(x+50,y,z-4+15, 4, 90, 4)[0], -10,0,0,[x+50,y,z-4+10])]
+    let rectIll3 = [rotate_rectangle_from_point(
+        rectangle3d(x+100,y,z-4+15, 4, 90, 4)[0], -10,0,0,[x+100,y,z-4+10])]
+    let rectIll4 = [rotate_rectangle_from_point(
+        rectangle3d(x+150,y,z-4+15, 4, 90, 4)[0], -10,0,0,[x+150,y,z-4+10])]
+    let rectIll5 = [rotate_rectangle_from_point(
+        rectangle3d(x+200,y,z-4+15, 4, 90, 4)[0], -10,0,0,[x+200,y,z-4+10])]
+    
+    var model3d = [rect1, rect2, rect3, rect4,rect4_2,rect6,rect7,rect8,rect8v1,
+        rect8v2,rect8v3, rectAll1, rectAll2, rectAll3, rectAll4, rectAll5, rectIll1, 
+        rectIll2, rectIll3, rectIll4, rectIll5]
     return model3d
 }
 
 function dibuixa(a,b,c) {
-    x =-50; y =20; z = 0 // punt inicial en 3D
+    x =-90; y =20; z = 0 // punt inicial en 3D
     //a,b,c angles de rotació
 
     model3d = model_viscaSofa(x, y, z)  
-    // start a new path
-    ctx.beginPath();
+    
 
     for(var i=0;i<model3d.length;i++) {
         dibuix_rectangle(model3d[i],a,b,c)
@@ -121,10 +154,7 @@ function dibuixa(a,b,c) {
     
     
     
-    ctx.strokeStyle = 'black';
     
-    // Draw the Path
-    ctx.stroke();
     
 
 }

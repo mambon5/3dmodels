@@ -1,30 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<body onmousedown="pillaPos(event)" onmousemove="actualitzaPos(event)" onmouseup="lliberaPos()">
-<title>models 3d</title>
-<h1>Models 3D</h1>
-<h2>Figures dibuixades amb js</h2>
-
-<div>
-    <p>rotation x <input type="number" id="angle_x" name="angle_x" value="0" onclick="main()">
-    rotation y <input type="number" id="angle_y" name="angle_y" value="0" onclick="main()">
-    rotation z <input type="number" id="angle_z" name="angle_z" value="0" onclick="main()">
-    zoom <input type="number" id="user_zoom" name="user_zoom" value="1" onclick="main()">
-    </p>
-    <button onclick="main()">rota</button>
-    </div>
-
-<canvas id="myCanvas" width="800" height="800"></canvas>
-
-<link rel="stylesheet" href="css/3dstyle.css">
-
-<script src="js/mouseEvents.js"></script>
-<script src="js/3dcalc_utils.js"></script>
-<script src="js/projection_rotation_utils.js"></script>
-<script src="js/matrix_ops.js"></script>
-<script src="js/resizeCanvas.js"></script>
-<script src="js/draw3d.js"></script>
-
-
-</body>
+  <head>
+    <title>models 3d</title>
+  </head>
+  <body>
+    <h1>Models 3d dels mobles</h1>
+    <p>Clickeu el model que vole veure: (figures dibuixades amb js)</p>
+    <ul>
+        <li>
+            <a href="LisSofa.html">LisSofa</a>
+        </li>
+    </ul>
+  </body>
 </html>

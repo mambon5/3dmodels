@@ -78,9 +78,17 @@ function rotate_vec(a,b,c,vector) {
 
 function rotate_vec_from_point(a,b,c,vector, point) {
     Rot = rotation_matrix(a,b,c)
+    // console.log("rotate vec from point: ")
+    // console.log("initial vector: "); console.log(vector)
+    // console.log("punt: "); console.log(point)
+    // console.log(" vector menys punt: "); console.log(vector_sum(vector, vec_per_escalar(point,-1)))
     let vec = vector_sum(vector, vec_per_escalar(point,-1))
     vec = matrix_multp(Rot,vec)
+    // console.log(" matriu rot: "); console.log(Rot)
+    // console.log(" vec rotat: "); console.log(vec)
     vec = vector_sum(vec, point)
+    // console.log("punt 2: "); console.log(point)
+    // console.log(" vector mes punt: "); console.log(vec) 
     return vec
 }
 
