@@ -244,6 +244,10 @@ function dibuixa(a,b,c) {
     //a,b,c angles de rotació
 
     let model3d = model_viscaSofa(x, y, z)  
+    let mida_tot = dona_mides(model3d)
+    console.log("quantitat de m de fusta necessària en llistons: " + mida_tot/100 + " m")
+    
+    console.log("quantitat d'elements: " + model3d.length)
     let textos = get_textos(x,y,z)
     
 
@@ -251,22 +255,10 @@ function dibuixa(a,b,c) {
         dibuix_rectangle(model3d[i],a,b,c)
         escriu_text(textos, a,b,c);
     }
-    
 
     
-    
-    
-    
-    
-
 }
 
 // executa main()
 
 main();
-
-
-
-
-
-
