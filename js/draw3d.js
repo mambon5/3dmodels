@@ -113,28 +113,29 @@ function dibuix_rectangle(rectangle, a,b,c) {
 
 function model_viscaSofa(x,y,z) {
     // x, y, z, ample, alt, profund
+    let prof = 42
     //travesanys profund terra    
-    recttravpf1 = rectangle3d(x,y,z,4,4,50);
-    recttravpf2 = rectangle3d(x+50,y,z,4,4,50);
-    recttravpf3 = rectangle3d(x+50+50,y,z,4,4,50);
-    recttravpf4 = rectangle3d(x+50+50+4+2,y,z,4,4,50);
-    recttravpf5 = rectangle3d(x+50+50+50+4+2,y,z,4,4,50);
-    recttravpf6 = rectangle3d(x+204+2,y,z,4,4,50);
+    recttravpf1 = rectangle3d(x,y,z,4,4,prof);
+    recttravpf2 = rectangle3d(x+50,y,z,4,4,prof);
+    recttravpf3 = rectangle3d(x+50+50,y,z,4,4,prof);
+    recttravpf4 = rectangle3d(x+50+50+4+2,y,z,4,4,prof);
+    recttravpf5 = rectangle3d(x+50+50+50+4+2,y,z,4,4,prof);
+    recttravpf6 = rectangle3d(x+204+2,y,z,4,4,prof);
     
-    let alt_y=39
+    let alt_y=38
     //travesanys profund alts    
-    recttravpfa1 = rectangle3d(x,alt_y-14,z+10,4,4,40);
-    recttravpfa2 = rectangle3d(x+204+2,alt_y-14,z+10,4,4,40);
+    recttravpfa1 = rectangle3d(x,alt_y-14,z+10,4,4,prof-10);
+    recttravpfa2 = rectangle3d(x+204+2,alt_y-14,z+10,4,4,prof-10);
     
 
     // pal amun petit frontal
     
-    rect7 = rectangle3d(x,y,z+50,4,alt_y,4);
-    rect8 = rectangle3d(x+50,y,z+50,4,alt_y,4);
-    rect8v1 = rectangle3d(x+100,y,z+50,4,alt_y,4);
-    rect8v2 = rectangle3d(x+104+2,y,z+50,4,alt_y,4);
-    rect8v3 = rectangle3d(x+154+2,y,z+50,4,alt_y,4);
-    rect8v4 = rectangle3d(x+204+2,y,z+50,4,alt_y,4);
+    rect7 = rectangle3d(x,y,z+prof,4,alt_y,4);
+    rect8 = rectangle3d(x+50,y,z+prof,4,alt_y,4);
+    rect8v1 = rectangle3d(x+100,y,z+prof,4,alt_y,4);
+    rect8v2 = rectangle3d(x+104+2,y,z+prof,4,alt_y,4);
+    rect8v3 = rectangle3d(x+154+2,y,z+prof,4,alt_y,4);
+    rect8v4 = rectangle3d(x+204+2,y,z+prof,4,alt_y,4);
 
     // pal amun petit darrere
     rectampet1 = rectangle3d(x,y,z-4+10,4,alt_y,4);
@@ -146,8 +147,8 @@ function model_viscaSofa(x,y,z) {
 
     //travesanys llargs 
     // rect5 = rectangle3d(x,y,z+50,124,4,4);
-    rectravll1 = rectangle3d(x,y+alt_y,z+50,104,4,4);
-    rectravll2 = rectangle3d(x+104+2,y+alt_y,z+50,104,4,4);
+    rectravll1 = rectangle3d(x,y+alt_y,z+prof,104,4,4);
+    rectravll2 = rectangle3d(x+104+2,y+alt_y,z+prof,104,4,4);
     rectravll3 = rectangle3d(x,y+alt_y,z-4+10,104,4,4);
     rectravll4 = rectangle3d(x+104+2,y+alt_y,z-4+10,104,4,4);
 
@@ -160,11 +161,11 @@ function model_viscaSofa(x,y,z) {
     rectAll6 = rectangle3d(x+204+2,y,z-4,4,90,4);
     
     
-    // pals inclinats llargs apoio pals frontals
+    // pals inclinats curts apoio pals frontals
     let ang_x = 40
     let long = 20
     let y_start = 2
-    let z_start = 35
+    let z_start = prof-15
     let rectIap1 = [rotate_rectangle_from_point(
         rectangle3d(x,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), "blue"]
     let rectIap2 = [rotate_rectangle_from_point(
@@ -198,16 +199,16 @@ function model_viscaSofa(x,y,z) {
     // reforç transversal y, evita moviment endir y
     let ang_z = 45
     long = 20
-    y_start = 25
-    z_start = 50
+    y_start = alt_y-14
+    z_start = prof
     let rectRefty1 = [rotate_rectangle_from_point(
-        rectangle3d(x+4,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,ang_z,[x+4,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+4,y-2+2+y_start,z+z_start]), "blue"]
     let rectRefty2 = [rotate_rectangle_from_point(
-        rectangle3d(x+100,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,90+ang_z,[x+100,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+100,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+100,y-2+2+y_start,z+z_start]), "blue"]
     let rectRefty3 = [rotate_rectangle_from_point(
-        rectangle3d(x+110,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,ang_z,[x+110,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+110,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+110,y-2+2+y_start,z+z_start]), "blue"]
     let rectRefty4 = [rotate_rectangle_from_point(
-        rectangle3d(x+206,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,90+ang_z,[x+206,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+206,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+206,y-2+2+y_start,z+z_start]), "blue"]
 
     
 
@@ -227,14 +228,18 @@ function model_viscaSofa(x,y,z) {
 
 
 function get_textos(x,y,z) {
-    let text_llarg1 = [[x+25,y+10,z], "<--50 cm-->"]
-    let text_llarg2 = [[x+75,y+10,z], "<--50 cm-->"]
-    let text_llarg3 = [[x-10,y+10,z+30], "<--50 cm-->"]
-    let text_llarg4 = [[x+106,y-4,z+60], "<- -  -      -     200 cm     -      - ->"]
-    let text_llarg5 = [[x-20,y+25,z+70], " ^^ 50 cm vv"]
+    let text_llarg1 = [[x+25,y+10,z], "<--52 cm-->"]
+    let text_llarg2 = [[x+75,y+10,z], "<--52 cm-->"]
+    let text_llarg3 = [[x-20,y-10,z+25], "<--50 cm-->"]
+    let text_llarg4 = [[x+106,y-10,z+70], "<- -  -      -     -     208 cm     -     -      - ->"]
+    let text_llarg4v1 = [[x+52,y-4,z+60], "<- -  -      104 cm      - ->"]
+    let text_llarg4v2 = [[x+158,y-4,z+60], "<- -  -      104 cm      - ->"]
+    let text_llarg5 = [[x-20,y+20,z+70], " ^^ 42 cm vv"]
+    let text_llarg6 = [[x+25,y+40,z-30], " ^^ 90 cm vv"]
 
     let textos = [
-        text_llarg1, text_llarg2, text_llarg3, text_llarg4, text_llarg5
+        text_llarg1, text_llarg2, text_llarg3, text_llarg4, text_llarg5, text_llarg6,
+        text_llarg4v1, text_llarg4v2
     ]
     return textos
 }
