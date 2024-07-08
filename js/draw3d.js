@@ -44,6 +44,25 @@ function dibu_poliedre(punts) {// dibuixem en 2d un poliedre (només usem les 2 
     ctx.lineTo(punts[0][0]*canvas_zoom*userZoom, punts[0][1]*canvas_zoom*userZoom);
 }
 
+function escriu_text(texts, a,b,c) {
+    // text_3d has a [point, text] elements, "Point" is the point on the map, "text"
+    // is the text itself
+    ctx.save();
+    ctx.scale(1,-1)
+    ctx.textAlign = "center";
+    ctx.fillStyle = "purple"
+    
+    for(var i=0; i< texts.length; i++) {
+        // pillant cada text
+        let text = texts[i]
+        let vect = rotate_vec(a,b,c,text[0])  
+        ctx.fillText(text[1],vect[0]*canvas_zoom*userZoom,-vect[1]*canvas_zoom*userZoom);
+    }
+    
+
+    ctx.restore();
+}
+
 
 
 // definint variables
@@ -206,15 +225,31 @@ function model_viscaSofa(x,y,z) {
     return model3d
 }
 
+
+function get_textos(x,y,z) {
+    let text_llarg1 = [[x+25,y+10,z], "<--50 cm-->"]
+    let text_llarg2 = [[x+75,y+10,z], "<--50 cm-->"]
+    let text_llarg3 = [[x-10,y+10,z+30], "<--50 cm-->"]
+    let text_llarg4 = [[x+106,y-4,z+60], "<- -  -      -     200 cm     -      - ->"]
+    let text_llarg5 = [[x-20,y+25,z+70], " ^^ 50 cm vv"]
+
+    let textos = [
+        text_llarg1, text_llarg2, text_llarg3, text_llarg4, text_llarg5
+    ]
+    return textos
+}
+
 function dibuixa(a,b,c) {
     x =-90; y =-10; z = -10 // punt inicial en 3D
     //a,b,c angles de rotació
 
-    model3d = model_viscaSofa(x, y, z)  
+    let model3d = model_viscaSofa(x, y, z)  
+    let textos = get_textos(x,y,z)
     
 
     for(var i=0;i<model3d.length;i++) {
         dibuix_rectangle(model3d[i],a,b,c)
+        escriu_text(textos, a,b,c);
     }
     
 
