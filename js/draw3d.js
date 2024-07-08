@@ -102,10 +102,14 @@ function model_viscaSofa(x,y,z) {
     recttravpf5 = rectangle3d(x+50+50+50+4+2,y,z,4,4,50);
     recttravpf6 = rectangle3d(x+204+2,y,z,4,4,50);
     
+    let alt_y=39
+    //travesanys profund alts    
+    recttravpfa1 = rectangle3d(x,alt_y-14,z+10,4,4,40);
+    recttravpfa2 = rectangle3d(x+204+2,alt_y-14,z+10,4,4,40);
     
 
     // pal amun petit frontal
-    let alt_y=44
+    
     rect7 = rectangle3d(x,y,z+50,4,alt_y,4);
     rect8 = rectangle3d(x+50,y,z+50,4,alt_y,4);
     rect8v1 = rectangle3d(x+100,y,z+50,4,alt_y,4);
@@ -130,16 +134,34 @@ function model_viscaSofa(x,y,z) {
 
     // pal amunt llarg darrere
     rectAll1 = rectangle3d(x,y,z-4,4,90,4);
-    rectAll2 = rectangle3d(x+50,y,z-4,4,90,4, "red");
+    rectAll2 = rectangle3d(x+50,y,z-4,4,90,4);
     rectAll3 = rectangle3d(x+100,y,z-4,4,90,4);
     rectAll4 = rectangle3d(x+104+2,y,z-4,4,90,4);
     rectAll5 = rectangle3d(x+154+2,y,z-4,4,90,4);
     rectAll6 = rectangle3d(x+204+2,y,z-4,4,90,4);
     
     
+    // pals inclinats llargs apoio pals frontals
+    let ang_x = 40
+    let long = 20
+    let y_start = 2
+    let z_start = 35
+    let rectIap1 = [rotate_rectangle_from_point(
+        rectangle3d(x,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), "blue"]
+    let rectIap2 = [rotate_rectangle_from_point(
+            rectangle3d(x+50,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+50,y+y_start,z+z_start+4]), "blue"]
+    let rectIap3 = [rotate_rectangle_from_point(
+        rectangle3d(x+100,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+100,y+y_start,z+z_start+4]), "blue"]
+    let rectIap4 = [rotate_rectangle_from_point(
+        rectangle3d(x+106,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), "blue"]
+    let rectIap5 = [rotate_rectangle_from_point(
+            rectangle3d(x+156,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+50,y+y_start,z+z_start+4]), "blue"]
+    let rectIap6 = [rotate_rectangle_from_point(
+        rectangle3d(x+206,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+100,y+y_start,z+z_start+4]), "blue"]
+
     // pals inclinats llargs respaldo
     //respado vs asiento debe manteren 110-120 grados de inclinacion, means 60 wrt vertical
-    let ang_x = -6
+    ang_x = -6
     let rectIll1 = [rotate_rectangle_from_point(
         rectangle3d(x+4,y,z-4+10, 4, 90, 4)[0], ang_x,0,0,[x+0+4,y,z-4+10])]
     let rectIll2 = [rotate_rectangle_from_point(
@@ -153,12 +175,34 @@ function model_viscaSofa(x,y,z) {
     let rectIll6 = [rotate_rectangle_from_point(
         rectangle3d(x+204+2-4,y,z-4+10, 4, 90, 4)[0], ang_x,0,0,[x+204+2-4,y,z-4+10])]
     
+
+    // reforç transversal y, evita moviment endir y
+    let ang_z = 45
+    long = 20
+    y_start = 25
+    z_start = 50
+    let rectRefty1 = [rotate_rectangle_from_point(
+        rectangle3d(x+4,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,ang_z,[x+4,y-2+2+y_start,z+z_start]), "blue"]
+    let rectRefty2 = [rotate_rectangle_from_point(
+        rectangle3d(x+100,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,90+ang_z,[x+100,y-2+2+y_start,z+z_start]), "blue"]
+    let rectRefty3 = [rotate_rectangle_from_point(
+        rectangle3d(x+110,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,ang_z,[x+110,y-2+2+y_start,z+z_start]), "blue"]
+    let rectRefty4 = [rotate_rectangle_from_point(
+        rectangle3d(x+206,y-2+y_start,z+z_start, 20, 4, 4)[0], 0,0,90+ang_z,[x+206,y-2+2+y_start,z+z_start]), "blue"]
+
+    
+
     var model3d = [recttravpf1, recttravpf2, recttravpf3, recttravpf4,
-        recttravpf5, recttravpf6,rectravll1, rectravll2,rectravll3, rectravll4,rect7,rect8,rect8v1,
+        recttravpf5, recttravpf6,
+        recttravpfa1, recttravpfa2,
+        rectravll1, rectravll2,rectravll3, rectravll4,rect7,rect8,rect8v1,
         rect8v2,rect8v3, rect8v4,rectAll1, rectAll2, rectAll3, rectAll4, rectAll5, rectAll6,
          rectIll1, 
         rectIll2, rectIll3, rectIll4, rectIll5, rectIll6,
-        rectampet1, rectampet2, rectampet3, rectampet4, rectampet5, rectampet6]
+        rectIap1, rectIap2, rectIap3, rectIap4, rectIap5, rectIap6,
+        rectampet1, rectampet2, rectampet3, rectampet4, rectampet5, rectampet6,
+        rectRefty1, rectRefty2, rectRefty3, rectRefty4
+    ]
     return model3d
 }
 
