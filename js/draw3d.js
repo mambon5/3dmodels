@@ -35,10 +35,28 @@ function main() {
           
 }
 
+function posaColor_segons_prof(cara, profunditats, color) {
+    let profMax = profunditats[1]
+    let profMin = profunditats[0]
+    if(color != "black") return color
+    let ProfMig = prof_mitja_cara(cara)
+    // console.log("profunditat mitja rec: " + ProfMig)
+    let valor = (ProfMig- profMin)/(profMax - profMin)
+    // elegeix el color de la línia segons la profunditat relativa al model 3d
+    if(valor < 0.25) color = "#202020"
+    else if(valor < 0.5) color = "#383838"
+    else if(valor < 0.75) color = "#505050"
+
+    return color
+
+}
+
+
 
 function dibu_poliedre(punts) {// dibuixem en 2d un poliedre (només usem les 2 primeres coords)
     ctx.moveTo(punts[0][0]*canvas_zoom*userZoom, punts[0][1]*canvas_zoom*userZoom);
-    for(let i=1; i< punts.length; i++) {        
+
+    for(let i=1; i< punts.length; i++) {
         ctx.lineTo(punts[i][0]*canvas_zoom*userZoom, punts[i][1]*canvas_zoom*userZoom);
     }
     ctx.lineTo(punts[0][0]*canvas_zoom*userZoom, punts[0][1]*canvas_zoom*userZoom);
@@ -58,12 +76,8 @@ function escriu_text(texts, a,b,c) {
         let vect = rotate_vec(a,b,c,text[0])  
         ctx.fillText(text[1],vect[0]*canvas_zoom*userZoom,-vect[1]*canvas_zoom*userZoom);
     }
-    
-
     ctx.restore();
 }
-
-
 
 // definint variables
 ample = 100;
@@ -89,22 +103,19 @@ function rectangle3d(x,y,z,ample,alt,profund,color="black") {
     return [poliedre, color]
 }
 
-function dibuix_rectangle(rectangle, a,b,c) {
+function dibuix_rectangle(rectangle, profunditats) {
     let poliedre = rectangle[0]
+    
     // preparant el camí
     ctx.beginPath();
      // rotant rectangle
-     for(let j=0;j<poliedre.length;j++) {
+    for(let j=0;j<poliedre.length;j++) {
         // pillant una cara
-        var proj = poliedre[j]
-        for(var i=0; i< poliedre[j].length; i++) {
-            // pillant cada vector de la cara
-            proj[i] = rotate_vec(a,b,c,poliedre[j][i])
-        }
+        var cara = poliedre[j]
         // dbuixant la cara rotada
-        dibu_poliedre(proj)
-        ctx.strokeStyle = rectangle[1];
-    
+        
+        ctx.strokeStyle = posaColor_segons_prof(cara, profunditats, rectangle[1])      
+        dibu_poliedre(cara)  
         // Draw the Path
         ctx.stroke();
         
@@ -169,17 +180,17 @@ function model_viscaSofa(x,y,z) {
     let y_start = 2
     let z_start = prof-15
     let rectIap1 = [rotate_rectangle_from_point(
-        rectangle3d(x,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), "blue"]
+        rectangle3d(x,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), ]
     let rectIap2 = [rotate_rectangle_from_point(
-            rectangle3d(x+llargT/2-4,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT/2-4,y+y_start,z+z_start+4]), "blue"]
+            rectangle3d(x+llargT/2-4,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT/2-4,y+y_start,z+z_start+4]), ]
     let rectIap3 = [rotate_rectangle_from_point(
-        rectangle3d(x+llargT-4,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT-4,y+y_start,z+z_start+4]), "blue"]
+        rectangle3d(x+llargT-4,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT-4,y+y_start,z+z_start+4]), ]
     let rectIap4 = [rotate_rectangle_from_point(
-        rectangle3d(x+llargT+2,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), "blue"]
+        rectangle3d(x+llargT+2,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x,y+y_start,z+z_start+4]), ]
     let rectIap5 = [rotate_rectangle_from_point(
-            rectangle3d(x+llargT+52,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT/2-4,y+y_start,z+z_start+4]), "blue"]
+            rectangle3d(x+llargT+52,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT/2-4,y+y_start,z+z_start+4]), ]
     let rectIap6 = [rotate_rectangle_from_point(
-        rectangle3d(x+llargT+100-2,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT+100-2,y+y_start,z+z_start+4]), "blue"]
+        rectangle3d(x+llargT+100-2,y+y_start,z+z_start, 4, long, 4)[0], ang_x,0,0,[x+llargT+100-2,y+y_start,z+z_start+4]), ]
 
     // pals inclinats llargs respaldo
     //respado vs asiento debe manteren 110-120 grados de inclinacion, means 60 wrt vertical
@@ -204,13 +215,13 @@ function model_viscaSofa(x,y,z) {
     y_start = alt_y-14
     z_start = prof
     let rectRefty1 = [rotate_rectangle_from_point(
-        rectangle3d(x+4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+4,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+4,y-2+2+y_start,z+z_start]), ]
     let rectRefty2 = [rotate_rectangle_from_point(
-        rectangle3d(x+llargT-4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT-4,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+llargT-4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT-4,y-2+2+y_start,z+z_start]), ]
     let rectRefty3 = [rotate_rectangle_from_point(
-        rectangle3d(x+llargT+6,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+llargT+6,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+llargT+6,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+llargT+6,y-2+2+y_start,z+z_start]), ]
     let rectRefty4 = [rotate_rectangle_from_point(
-        rectangle3d(x+llargT+100-2,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT+100-2,y-2+2+y_start,z+z_start]), "blue"]
+        rectangle3d(x+llargT+100-2,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT+100-2,y-2+2+y_start,z+z_start]), ]
 
     
 
@@ -257,9 +268,16 @@ function dibuixa(a,b,c) {
     console.log("quantitat d'elements: " + model3d.length)
     let textos = get_textos(x,y,z)
     
-
-    for(var i=0;i<model3d.length;i++) {
-        dibuix_rectangle(model3d[i],a,b,c)
+    // rota el model
+    let model_rotat = rota_model(model3d,a,b,c)
+    
+    //calcular profunditat mínima i màxima
+    let profunds = profundis(model_rotat)
+    console.log("profunditats del model:")
+    console.log(profunds)
+    
+    for(var i=0;i<model_rotat.length;i++) {
+        dibuix_rectangle(model_rotat[i],profunds)
         escriu_text(textos, a,b,c);
     }
 

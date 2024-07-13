@@ -107,3 +107,22 @@ function rotate_rectangle_from_point(rectangle, a,b,c, point) {
    }
    return rect;
 }
+
+function rota_model(model,a,b,c) {
+    let model_rotat = JSON.parse(JSON.stringify(model));
+    for(var i=0;i<model_rotat.length;i++) {
+        let rectangle = model_rotat[i][0] // cada rectangle té [poliedre, color]
+        for(var j=0;j<rectangle.length;j++) {
+            // pillant una cara
+            let cara = rectangle[j]
+            for(var w=0;w<cara.length;w++) {
+                // rotant cada vector de la cara
+                cara[w] = rotate_vec(a,b,c,rectangle[j][w])
+            }
+            rectangle[j] = cara
+        }
+        model_rotat[i][0] = rectangle
+    }
+
+    return model_rotat
+}
