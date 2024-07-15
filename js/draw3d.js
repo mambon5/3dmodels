@@ -9,9 +9,6 @@ userZoom = 1
 function main() {    
     // resizeCanvas();
     // dibuixaFigures(); 
-    
-     
-
     var alpha = document.getElementById("angle_x").value
     var beta = document.getElementById("angle_y").value
     var gamma = document.getElementById("angle_z").value
@@ -31,8 +28,21 @@ function main() {
     }
 
     ctx.clearRect(-400,-400,1200, 1200)
-    dibuixa(alpha,beta,gamma);
-          
+
+    x =-90; y =-10; z = -10 // punt inicial en 3D
+    let model3d = model_viscaSofa(x, y, z)  
+    let talls = dona_mides(model3d)
+    console.log("trossos necessaris: ")
+    console.log(talls)
+    
+    console.log("quantitat d'elements: " + model3d.length)
+
+
+    dibuixa(model3d, alpha,beta,gamma);
+
+    let res = ordena_tros_fusta(JSON.parse(JSON.stringify(talls)), 200, 18)    
+    console.log("trossejat dels llistons: ")
+    console.log(res)
 }
 
 function posaColor_segons_prof(cara, profunditats, color) {
@@ -136,12 +146,11 @@ function model_viscaSofa(x,y,z) {
     
     let alt_y=38
     //travesanys profund alts    
-    recttravpfa1 = rectangle3d(x,alt_y-12,z+10,4,4,prof-10);
-    recttravpfa2 = rectangle3d(x+llargT+100-2,alt_y-12,z+10,4,4,prof-10);
+    recttravpfa1 = rectangle3d(x,alt_y-12,z+11,4,4,prof-11);
+    recttravpfa2 = rectangle3d(x+llargT+100-2,alt_y-12,z+11,4,4,prof-11);
     
 
-    // pal amun petit frontal
-    
+    // pal amun petit frontal    
     rect7 = rectangle3d(x,y,z+prof,4,alt_y,4);
     rect8 = rectangle3d(x+llargT/2-4,y,z+prof,4,alt_y,4);
     rect8v1 = rectangle3d(x+llargT-4,y,z+prof,4,alt_y,4);
@@ -150,20 +159,20 @@ function model_viscaSofa(x,y,z) {
     rect8v4 = rectangle3d(x+llargT+100-2,y,z+prof,4,alt_y,4);
 
     // pal amun petit darrere
-    rectampet1 = rectangle3d(x,y,z-4+10,4,alt_y-2,4);
-    rectampet2 = rectangle3d(x+llargT/2-4,y,z-4+10,4,alt_y-2,4);
-    rectampet3 = rectangle3d(x+llargT-4,y,z-4+10,4,alt_y-2,4);
-    rectampet4 = rectangle3d(x+llargT+2,y,z-4+10,4,alt_y-2,4);
-    rectampet5 = rectangle3d(x+llargT+50+2,y,z-4+10,4,alt_y-2,4);
-    rectampet6 = rectangle3d(x+llargT+100-2,y,z-4+10,4,alt_y-2,4);
+    rectampet1 = rectangle3d(x,y+4,z-4+11,4,alt_y-6,4);
+    rectampet2 = rectangle3d(x+llargT/2-4,y+4,z-4+11,4,alt_y-6,4);
+    rectampet3 = rectangle3d(x+llargT-4,y+4,z-4+11,4,alt_y-6,4);
+    rectampet4 = rectangle3d(x+llargT+2,y+4,z-4+11,4,alt_y-6,4);
+    rectampet5 = rectangle3d(x+llargT+50+2,y+4,z-4+11,4,alt_y-6,4);
+    rectampet6 = rectangle3d(x+llargT+100-2,y+4,z-4+11,4,alt_y-6,4);
 
     //travesanys llargs 
     
     // rect5 = rectangle3d(x,y,z+50,124,4,4);
     rectravll1 = rectangle3d(x,y+alt_y,z+prof,llargT,4,4);
     rectravll2 = rectangle3d(x+llargT+2,y+alt_y,z+prof,llargT,4,4);
-    rectravll3 = rectangle3d(x,y+alt_y-2,z-4+10,llargT,4,4);
-    rectravll4 = rectangle3d(x+llargT+2,y+alt_y-2,z-4+10,llargT,4,4);
+    rectravll3 = rectangle3d(x,y+alt_y-2,z-4+11,llargT,4,4);
+    rectravll4 = rectangle3d(x+llargT+2,y+alt_y-2,z-4+11,llargT,4,4);
 
     // pal amunt llarg darrere
     rectAll1 = rectangle3d(x,y,z-4,4,90,4);
@@ -257,21 +266,17 @@ function get_textos(x,y,z) {
     return textos
 }
 
-function dibuixa(a,b,c) {
-    x =-90; y =-10; z = -10 // punt inicial en 3D
+function dibuixa(model, a,b,c) {
+    
     //a,b,c angles de rotació
 
-    let model3d = model_viscaSofa(x, y, z)  
-    let mida_tot = dona_mides(model3d)
-    console.log("quantitat de m de fusta necessària en llistons: " + mida_tot/100 + " m")
-    
-    console.log("quantitat d'elements: " + model3d.length)
+    // genera els textos
     let textos = get_textos(x,y,z)
     
     // rota el model
-    let model_rotat = rota_model(model3d,a,b,c)
+    let model_rotat = rota_model(model,a,b,c)
     
-    //calcular profunditat mínima i màxima
+    //calcular profunditat mínima i màxim
     let profunds = profundis(model_rotat)
     console.log("profunditats del model:")
     console.log(profunds)
