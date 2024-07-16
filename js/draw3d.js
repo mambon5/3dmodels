@@ -146,8 +146,8 @@ function model_viscaSofa(x,y,z) {
     
     let alt_y=38
     //travesanys profund alts    
-    recttravpfa1 = rectangle3d(x,alt_y-12,z+11,4,4,prof-11);
-    recttravpfa2 = rectangle3d(x+llargT+100-2,alt_y-12,z+11,4,4,prof-11);
+    recttravpfa1 = rectangle3d(x,alt_y-12,z+14,4,4,prof-14);
+    recttravpfa2 = rectangle3d(x+llargT+100-2,alt_y-12,z+14,4,4,prof-14);
     
 
     // pal amun petit frontal    
@@ -159,20 +159,20 @@ function model_viscaSofa(x,y,z) {
     rect8v4 = rectangle3d(x+llargT+100-2,y,z+prof,4,alt_y,4);
 
     // pal amun petit darrere
-    rectampet1 = rectangle3d(x,y+4,z-4+11,4,alt_y-6,4);
-    rectampet2 = rectangle3d(x+llargT/2-4,y+4,z-4+11,4,alt_y-6,4);
-    rectampet3 = rectangle3d(x+llargT-4,y+4,z-4+11,4,alt_y-6,4);
-    rectampet4 = rectangle3d(x+llargT+2,y+4,z-4+11,4,alt_y-6,4);
-    rectampet5 = rectangle3d(x+llargT+50+2,y+4,z-4+11,4,alt_y-6,4);
-    rectampet6 = rectangle3d(x+llargT+100-2,y+4,z-4+11,4,alt_y-6,4);
+    rectampet1 = rectangle3d(x,y+4,z-4+14,4,alt_y-6,4);
+    rectampet2 = rectangle3d(x+llargT/2-4,y+4,z-4+14,4,alt_y-6,4);
+    rectampet3 = rectangle3d(x+llargT-4,y+4,z-4+14,4,alt_y-6,4);
+    rectampet4 = rectangle3d(x+llargT+2,y+4,z-4+14,4,alt_y-6,4);
+    rectampet5 = rectangle3d(x+llargT+50+2,y+4,z-4+14,4,alt_y-6,4);
+    rectampet6 = rectangle3d(x+llargT+100-2,y+4,z-4+14,4,alt_y-6,4);
 
     //travesanys llargs 
     
     // rect5 = rectangle3d(x,y,z+50,124,4,4);
     rectravll1 = rectangle3d(x,y+alt_y,z+prof,llargT,4,4);
     rectravll2 = rectangle3d(x+llargT+2,y+alt_y,z+prof,llargT,4,4);
-    rectravll3 = rectangle3d(x,y+alt_y-2,z-4+11,llargT,4,4);
-    rectravll4 = rectangle3d(x+llargT+2,y+alt_y-2,z-4+11,llargT,4,4);
+    rectravll3 = rectangle3d(x,y+alt_y-2,z-4+14,llargT,4,4);
+    rectravll4 = rectangle3d(x+llargT+2,y+alt_y-2,z-4+14,llargT,4,4);
 
     // pal amunt llarg darrere
     rectAll1 = rectangle3d(x,y,z-4,4,90,4);
@@ -218,7 +218,7 @@ function model_viscaSofa(x,y,z) {
         rectangle3d(x+llargT+100-6,y,z-4+10, 4, 90, 4)[0], ang_x,0,0,[x+llargT+100-6,y,z-4+10])]
     
 
-    // reforç transversal y, evita moviment endir y
+    // reforç transversal frontal y, evita moviment endir y
     let ang_z = 45
     long = 20
     y_start = alt_y-14
@@ -232,6 +232,33 @@ function model_viscaSofa(x,y,z) {
     let rectRefty4 = [rotate_rectangle_from_point(
         rectangle3d(x+llargT+100-2,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT+100-2,y-2+2+y_start,z+z_start]), ]
 
+  
+    // reforç transversal traser y, evita moviment endir y
+    z_start=10
+    let rectReftytr1 = [rotate_rectangle_from_point(
+        rectangle3d(x+4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+4,y-2+2+y_start,z+z_start]), ]
+    let rectReftytr2 = [rotate_rectangle_from_point(
+        rectangle3d(x+llargT-4,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT-4,y-2+2+y_start,z+z_start]), ]
+    let rectReftytr3 = [rotate_rectangle_from_point(
+        rectangle3d(x+llargT+6,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,ang_z,[x+llargT+6,y-2+2+y_start,z+z_start]), ]
+    let rectReftytr4 = [rotate_rectangle_from_point(
+        rectangle3d(x+llargT+100-2,y-2+y_start,z+z_start, long, 4, 4)[0], 0,0,90+ang_z,[x+llargT+100-2,y-2+2+y_start,z+z_start]), ]
+
+
+    // petit reforç traser entre reforços alts
+    let altur_y = 30
+    let rectPetitR1 = [rotate_rectangle_from_point(
+        rectangle3d(x,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
+    let rectPetitR2 = [rotate_rectangle_from_point(
+        rectangle3d(x+46,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
+    let rectPetitR3 = [rotate_rectangle_from_point(
+        rectangle3d(x+96,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
+    let rectPetitR4 = [rotate_rectangle_from_point(
+        rectangle3d(x+102,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
+    let rectPetitR5 = [rotate_rectangle_from_point(
+        rectangle3d(x+152,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
+    let rectPetitR6 = [rotate_rectangle_from_point(
+        rectangle3d(x+198,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
     
 
     var model3d = [recttravpf1, recttravpf2, recttravpf3, recttravpf4,
@@ -243,7 +270,9 @@ function model_viscaSofa(x,y,z) {
         rectIll2, rectIll3, rectIll4, rectIll5, rectIll6,
         rectIap1, rectIap2, rectIap3, rectIap4, rectIap5, rectIap6,
         rectampet1, rectampet2, rectampet3, rectampet4, rectampet5, rectampet6,
-        rectRefty1, rectRefty2, rectRefty3, rectRefty4
+        rectRefty1, rectRefty2, rectRefty3, rectRefty4,
+        rectPetitR1,rectPetitR2,rectPetitR3,rectPetitR4,rectPetitR5,rectPetitR6,
+        rectReftytr1,rectReftytr2,rectReftytr3,rectReftytr4
     ]
     return model3d
 }
