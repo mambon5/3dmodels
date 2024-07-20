@@ -287,6 +287,15 @@ function model_viscaSofa(x,y,z) {
     let rectRefTapa4 = [rotate_rectangle_from_point(
         rectangle3d(x+102+87,y+alty,z+zprofa+20+10,10,4,4)[0], 0,45,0,[x+102+87,y+alty,z+zprofa+20+10]), ]
 
+    let rectRefTapa5 = [rotate_rectangle_from_point(
+        rectangle3d(x+6,y+alty,z+zprofa+23,10,4,4)[0], 0,-45,0,[x+6,y+alty,z+zprofa+23]), ]
+    let rectRefTapa6 = [rotate_rectangle_from_point(
+        rectangle3d(x+102+6,y+alty,z+zprofa+23,10,4,4)[0], 0,-45,0,[x+102+6,y+alty,z+zprofa+23]), ]
+    let rectRefTapa7 = [rotate_rectangle_from_point(
+        rectangle3d(x+90,y+alty,z+zprofa+3,10,4,4)[0], 0,-45,0,[x+90,y+alty,z+zprofa+3]), ]
+    let rectRefTapa8 = [rotate_rectangle_from_point(
+        rectangle3d(x+102+90,y+alty,z+zprofa+3,10,4,4)[0], 0,-45,0,[x+102+90,y+alty,z+zprofa+3]), ]
+
     var model3d = [recttravpf1, recttravpf2, recttravpf3, recttravpf4,
         recttravpf5, recttravpf6,
         recttravpfa1, recttravpfa2,
@@ -301,7 +310,7 @@ function model_viscaSofa(x,y,z) {
         rectReftytr1,rectReftytr2,rectReftytr3,rectReftytr4,
         rectTapa1, rectTapa2, rectTapa3, rectTapa4,
         rectTapa5, rectTapa6, rectTapa7, rectTapa8,
-        rectRefTapa1, rectRefTapa2, rectRefTapa3, rectRefTapa4
+        rectRefTapa1, rectRefTapa2, rectRefTapa3, rectRefTapa4, rectRefTapa5, rectRefTapa6, rectRefTapa7, rectRefTapa8
     ]
     return model3d
 }
@@ -316,10 +325,11 @@ function get_textos(x,y,z) {
     let text_llarg4v2 = [[x+158,y-4,z+60], "<- -  -      100 cm      - ->"]
     let text_llarg5 = [[x-20,y+20,z+70], " ^^ 42 cm vv"]
     let text_llarg6 = [[x+25,y+40,z-30], " ^^ 90 cm vv"]
+    let text_titolTapa = [[x+220,y+130,z-15], "Tapa del banc del sofa, 2 de 100cm x 36cm x 4cm"]
 
     let textos = [
         text_llarg1, text_llarg2, text_llarg3, text_llarg4, text_llarg5, text_llarg6,
-        text_llarg4v1, text_llarg4v2
+        text_llarg4v1, text_llarg4v2, text_titolTapa
     ]
     return textos
 }
