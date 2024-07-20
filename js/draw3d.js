@@ -159,20 +159,21 @@ function model_viscaSofa(x,y,z) {
     rect8v4 = rectangle3d(x+llargT+100-2,y,z+prof,4,alt_y,4);
 
     // pal amun petit darrere
-    rectampet1 = rectangle3d(x,y+4,z-4+14,4,alt_y-6,4);
-    rectampet2 = rectangle3d(x+llargT/2-4,y+4,z-4+14,4,alt_y-6,4);
-    rectampet3 = rectangle3d(x+llargT-4,y+4,z-4+14,4,alt_y-6,4);
-    rectampet4 = rectangle3d(x+llargT+2,y+4,z-4+14,4,alt_y-6,4);
-    rectampet5 = rectangle3d(x+llargT+50+2,y+4,z-4+14,4,alt_y-6,4);
-    rectampet6 = rectangle3d(x+llargT+100-2,y+4,z-4+14,4,alt_y-6,4);
+    let zprofa = -4+14
+    rectampet1 = rectangle3d(x,y+4,z+zprofa,4,alt_y-6,4);
+    rectampet2 = rectangle3d(x+llargT/2-4,y+4,z+zprofa,4,alt_y-6,4);
+    rectampet3 = rectangle3d(x+llargT-4,y+4,z+zprofa,4,alt_y-6,4);
+    rectampet4 = rectangle3d(x+llargT+2,y+4,z+zprofa,4,alt_y-6,4);
+    rectampet5 = rectangle3d(x+llargT+50+2,y+4,z+zprofa,4,alt_y-6,4);
+    rectampet6 = rectangle3d(x+llargT+100-2,y+4,z+zprofa,4,alt_y-6,4);
 
     //travesanys llargs 
     
     // rect5 = rectangle3d(x,y,z+50,124,4,4);
     rectravll1 = rectangle3d(x,y+alt_y,z+prof,llargT,4,4);
     rectravll2 = rectangle3d(x+llargT+2,y+alt_y,z+prof,llargT,4,4);
-    rectravll3 = rectangle3d(x,y+alt_y-2,z-4+14,llargT,4,4);
-    rectravll4 = rectangle3d(x+llargT+2,y+alt_y-2,z-4+14,llargT,4,4);
+    rectravll3 = rectangle3d(x,y+alt_y-2,z+zprofa,llargT,4,4);
+    rectravll4 = rectangle3d(x+llargT+2,y+alt_y-2,z+zprofa,llargT,4,4);
 
     // pal amunt llarg darrere
     rectAll1 = rectangle3d(x,y,z-4,4,90,4);
@@ -261,6 +262,31 @@ function model_viscaSofa(x,y,z) {
         rectangle3d(x+198,y+altur_y,z, 4, 4, 9.5)[0], 0,0,0,[x+0+4,y,z-4+10]), ]
     
 
+    // tapa del seeint del sofà
+    //pals llarg transversals al llarg de x
+    let alty = 120
+    let profz = 28
+    let rectTapa1 = rectangle3d(x,y+alty,z+zprofa,100,4,4);
+    let rectTapa2 = rectangle3d(x+102,y+alty,z+zprofa,100,4,4);
+    let rectTapa3 = rectangle3d(x,y+alty,z+zprofa+profz+4,100,4,4);
+    let rectTapa4 = rectangle3d(x+102,y+alty,z+zprofa+profz+4,100,4,4);
+
+    //pals curts al llarg de z
+    let rectTapa5 = rectangle3d(x,y+alty,z+zprofa+4,4,4,profz);
+    let rectTapa6 = rectangle3d(x+100-4,y+alty,z+zprofa+4,4,4,profz);
+    let rectTapa7 = rectangle3d(x+102,y+alty,z+zprofa+4,4,4,profz);
+    let rectTapa8 = rectangle3d(x+202-4,y+alty,z+zprofa+4,4,4,profz);
+
+    //reforç tapa
+    let rectRefTapa1 = [rotate_rectangle_from_point(
+        rectangle3d(x+3,y+alty,z+zprofa+10,10,4,4)[0], 0,45,0,[x+3,y+alty,z+zprofa+10]), ]
+    let rectRefTapa2 = [rotate_rectangle_from_point(
+        rectangle3d(x+102+3,y+alty,z+zprofa+10,10,4,4)[0], 0,45,0,[x+102+3,y+alty,z+zprofa+10]), ]
+    let rectRefTapa3 = [rotate_rectangle_from_point(
+        rectangle3d(x+87,y+alty,z+zprofa+20+10,10,4,4)[0], 0,45,0,[x+87,y+alty,z+zprofa+20+10]), ]
+    let rectRefTapa4 = [rotate_rectangle_from_point(
+        rectangle3d(x+102+87,y+alty,z+zprofa+20+10,10,4,4)[0], 0,45,0,[x+102+87,y+alty,z+zprofa+20+10]), ]
+
     var model3d = [recttravpf1, recttravpf2, recttravpf3, recttravpf4,
         recttravpf5, recttravpf6,
         recttravpfa1, recttravpfa2,
@@ -272,7 +298,10 @@ function model_viscaSofa(x,y,z) {
         rectampet1, rectampet2, rectampet3, rectampet4, rectampet5, rectampet6,
         rectRefty1, rectRefty2, rectRefty3, rectRefty4,
         rectPetitR1,rectPetitR2,rectPetitR3,rectPetitR4,rectPetitR5,rectPetitR6,
-        rectReftytr1,rectReftytr2,rectReftytr3,rectReftytr4
+        rectReftytr1,rectReftytr2,rectReftytr3,rectReftytr4,
+        rectTapa1, rectTapa2, rectTapa3, rectTapa4,
+        rectTapa5, rectTapa6, rectTapa7, rectTapa8,
+        rectRefTapa1, rectRefTapa2, rectRefTapa3, rectRefTapa4
     ]
     return model3d
 }
