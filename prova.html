@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prova LisSofa</title>
+  <style>
+    * { margin:0; padding:0; }
+    html, body { width:100%; height:100%; }
+
+    body { 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p, button, input {
+      font-size: 1.2rem;
+    }
+
+    /* Responsive: quan la pantalla és petita */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 5rem;
+      }
+      p, button, input {
+        font-size: 4.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>LisSofa</h1>
+  <p>Clicar i arrossegar sobre el dibuix per moure el model.</p>
+
+  <div>
+    <p>
+      rotation x <input type="number">
+      rotation y <input type="number">
+      rotation z <input type="number">
+      zoom <input type="number">
+    </p>
+    <button>rota</button>
+  </div>
+
+</body>
+</html>

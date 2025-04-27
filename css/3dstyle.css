@@ -1,9 +1,63 @@
-* { margin:0; padding:0; } /* to remove the top and left whitespace */
+/* Per defecte, quan la finestra és gran */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+html, body { 
+  width: 100%; 
+  height: 100%; 
+  overflow: hidden; /* Evitem el desbordament de contingut */
+}
 
-canvas { 
-    display:block;
-    width:1000px;
-    height:800px;
- } /* To remove the scrollbars */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Canviem de center a flex-start per evitar que es tanqui */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 20px; /* Afegim marge superior per evitar que el títol es talli */
+  overflow-y: auto; /* Permet fer scroll només en el cos */
+}
+
+header {
+  margin-top: 30px; /* Afegim més marge per separar el títol de la part superior de la finestra */
+}
+
+h1 {
+  font-size: 2.5rem; /* Títol gran per a pantalles grans */
+  margin-bottom: 20px; /* Espai entre el títol i els altres elements */
+}
+
+p, button, input, select {
+  font-size: 1.2rem; /* Text general per a pantalles grans */
+  margin-bottom: 15px; /* Espai entre els elements per evitar que es toquin */
+}
+
+/* Quan l'amplada de la pantalla sigui petita (mòbil) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem; /* Títol més gran en mòbil */
+  }
+
+  p, button, input, select {
+    font-size: 2rem; /* Augmentar el text per a mòbils */
+  }
+
+  select {
+    width: 120px; /* Menor ample per a pantalles petites */
+  }
+}
+
+/* Quan l'amplada de la pantalla sigui molt petita (mòbil vertical) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem; /* Mida més petita del títol */
+  }
+
+  p, button, input, select {
+    font-size: 1.5rem; /* Text i inputs més petits en mòbil petit */
+  }
+
+  select {
+    width: 100px; /* Reduïm una mica més el select */
+  }
+}
