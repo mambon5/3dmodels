@@ -7,7 +7,7 @@ function pillaPos(event) {
     let x = event.clientX;
     let y = event.clientY;
     newMousePos = [x, y]
-    var elem = document.body; //body or what element you want.
+    var elem = document.getElementById("myCanvas"); //body or what element you want.
     // dont trigger the default (scroll) behavior when the event is originating from that element
     elem.setAttribute("style","touch-action: none;");   
 }

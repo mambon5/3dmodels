@@ -78,7 +78,7 @@ function escriu_text(texts, a,b,c) {
     ctx.save();
     ctx.scale(1,-1)
     ctx.textAlign = "center";
-    ctx.fillStyle = "purple"
+    ctx.fillStyle = "red"
     
     for(var i=0; i< texts.length; i++) {
         // pillant cada text
@@ -161,9 +161,9 @@ function model_viscaSofa(x,y,z) {
     model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y,z-gruix_f,ample_estants_dreta+gruix_f,alt_y+gruix_f,gruix_f))
 
     //estants dreta
-    model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y+20,z-gruix_f,ample_estants_dreta,gruix_f,prof))
-    model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y+40,z-gruix_f,ample_estants_dreta,gruix_f,prof))
-    model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y+60,z-gruix_f,ample_estants_dreta,gruix_f,prof))
+    model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y+20,z,ample_estants_dreta,gruix_f,prof))
+    model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y+40,z,ample_estants_dreta,gruix_f,prof))
+    model3d.push(rectangle3d(x+llargT-gruix_f-ample_estants_dreta,y+60,z,ample_estants_dreta,gruix_f,prof))
 
 
     //placa fons dreta
@@ -171,9 +171,9 @@ function model_viscaSofa(x,y,z) {
     model3d.push(rectangle3d(x,y,z-gruix_f,ample_estants_esq+gruix_f,alt_y+gruix_f,gruix_f))
     
     //estants esq
-    model3d.push(rectangle3d(x,y+20,z-gruix_f,ample_estants_esq,gruix_f,prof))
-    model3d.push(rectangle3d(x,y+40,z-gruix_f,ample_estants_esq,gruix_f,prof))
-    model3d.push(rectangle3d(x,y+60,z-gruix_f,ample_estants_esq,gruix_f,prof))
+    model3d.push(rectangle3d(x+gruix_f,y+20,z,ample_estants_esq,gruix_f,prof))
+    model3d.push(rectangle3d(x+gruix_f,y+40,z,ample_estants_esq,gruix_f,prof))
+    model3d.push(rectangle3d(x+gruix_f,y+60,z,ample_estants_esq,gruix_f,prof))
 
 
     // caldera
@@ -187,7 +187,7 @@ function model_viscaSofa(x,y,z) {
 
 function get_textos(x,y,z) {
     let textos = [    ]
-    textos.push([[x+25,y+10,z], "caldera"])
+    textos.push([[x+25,y+30,z+15], "caldera"])
     // let text_llarg2 = [[x+75,y+10,z], "<--46 cm-->"]
     // let text_llarg3 = [[x-20,y-10,z+25], "<--50 cm-->"]
     // let text_llarg4 = [[x+106,y-10,z+70], "<- -  -      -     -     202 cm     -     -      - ->"]

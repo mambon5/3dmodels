@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Mobles 3D</title>
+    <link rel="stylesheet" href="css/3dstyle.css">
+
+    <script src="js/mouseEvents.js"></script>
+</head>
+
+<body >
+
+<header>
+    <h1 id="moble-title">Mobles 3D</h1> <!-- Canviarem aquest text amb JS -->
+</header>
+
+<p>Clicar i arrossegar sobre el dibuix per moure el model.</p>
+
+<div>
+    <p>
+    rotation x <input type="number" id="angle_x" name="angle_x" value="0" onclick="main()">
+    rotation y <input type="number" id="angle_y" name="angle_y" value="0" onclick="main()">
+    rotation z <input type="number" id="angle_z" name="angle_z" value="0" onclick="main()">
+    zoom 
+    <select id="user_zoom" name="user_zoom" onchange="main()">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    </p>
+    <button onclick="main()">rota</button>
+</div>
+
+<canvas id="myCanvas" width="800" height="800"></canvas>
+
+<script>
+    const canvass = document.getElementById('myCanvas');
+
+    canvass.addEventListener('pointerdown', pillaPos);
+    canvass.addEventListener('pointermove', actualitzaPos);
+    canvass.addEventListener('pointerup', lliberaPos);
+
+    // >>> Dibuixem inicialment el model quan la pàgina carrega:
+    window.addEventListener('load', main);
+</script>
+
+
+
+<!-- JS fixos -->
+<script src="js/ordena_trossos_fusta.js"></script>
+<script src="js/calcula_mides_model3d.js"></script>
+<script src="js/3dcalc_utils.js"></script>
+<script src="js/projection_rotation_utils.js"></script>
+<script src="js/matrix_ops.js"></script>
+<script src="js/resizeCanvas.js"></script>
+
+<!-- JS dinàmic -->
+<script>
+    // Agafem els paràmetres de la URL
+    const params = new URLSearchParams(window.location.search);
+    const title = params.get('title');
+    const scriptName = params.get('script');
+
+    // Actualitzem el títol de la pàgina i del header
+    if (title) {
+        document.title = title;
+        document.getElementById('moble-title').innerText = title;
+    }
+
+    // Carreguem el script del model 3D corresponent
+    if (scriptName) {
+        const script = document.createElement('script');
+        script.src = "js/" + scriptName;
+        document.body.appendChild(script);
+    } else {
+        console.error("No s'ha indicat cap script a carregar!");
+    }
+</script>
+
+
+
+
+
+</body>
+</html>
